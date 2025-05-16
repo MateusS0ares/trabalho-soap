@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Transportadora</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-5xl">
+    <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Sistema da Transportadora</h1>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <th class="px-4 py-3 text-left">Número</th>
+            <th class="px-4 py-3 text-left">Item</th>
+            <th class="px-4 py-3 text-left">Quantidade</th>
+            <th class="px-4 py-3 text-left">Destinatário</th>
+            <th class="px-4 py-3 text-left">Status</th>
+            <th class="px-4 py-3 text-left">Atualizar</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            {% for numero, dados in pedidos.items() %}
+            <tr class="align-top">
+                <td class="px-4 py-2">{{ numero }}</td>
+                <td class="px-4 py-2">
+                <ul class="list-disc ml-4">
+                    {% for item in dados.itens %}
+                    <li>{{ item.nome }} ({{ item.quantidade }})</li>
+                    {% endfor %}
+                </ul>
+                </td>
+                <td class="px-4 py-2">{{ dados.endereco }}</td>
+                <td class="px-4 py-2">{{ dados.destinatario }}</td>
+                <td class="px-4 py-2 text-gray-700">{{ dados.status }}</td>
+                <td class="px-4 py-2">
+                <form method="POST" action="{{ url_for('atualizar_status') }}" class="flex items-center space-x-2">
+                    <input type="hidden" name="numero" value="{{ numero }}">
+                    <select name="status" class="border rounded p-1 text-sm">
+                    <option value="Aguardando coleta" {% if dados.status == 'Aguardando coleta' %}selected{% endif %}>Aguardando coleta</option>
+                    <option value="Em transporte" {% if dados.status == 'Em transporte' %}selected{% endif %}>Em transporte</option>
+                    <option value="Entregue" {% if dados.status == 'Entregue' %}selected{% endif %}>Entregue</option>
+                    <option value="Falha na entrega" {% if dados.status == 'Falha na entrega' %}selected{% endif %}>Falha na entrega</option>
+                    </select>
+                    <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                    Atualizar
+                    </button>
+                </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center py-4 text-gray-500">Nenhum pedido recebido.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

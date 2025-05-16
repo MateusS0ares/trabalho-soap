@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Status do Pedido</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md text-center">
+      <h2 class="text-xl font-bold mb-4">Status do Pedido</h2>
+      <p class="mb-4">Pedido <strong>{{ numero }}</strong> está com status:</p>
+      <p class="text-lg font-semibold text-blue-700">{{ status }}</p>
+      <div class="mt-6">
+        <a href="/" class="text-sm text-gray-500 hover:underline">Voltar</a>
+      </div>
+    </div>
+  </body>
+</html>

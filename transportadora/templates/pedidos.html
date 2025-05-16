@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pedidos Recebidos</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white rounded-2xl shadow-lg p-8 max-w-xl w-full">
+      <h2 class="text-2xl font-bold mb-6 text-center">Pedidos Recebidos</h2>
+      <ul class="space-y-4">
+        {% for numero, dados in pedidos.items() %}
+        <li class="border p-4 rounded shadow-sm">
+          <p><strong>Pedido {{ numero }}</strong></p>
+          <p>
+            {{ dados.item }} ({{ dados.quantidade }}) para {{ dados.destinatario
+            }}
+          </p>
+          <p>Status: <strong>{{ dados.status }}</strong></p>
+          <a
+            href="{{ url_for('atualizar_status', numero=numero) }}"
+            class="text-blue-600 hover:underline"
+            >Atualizar</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="text-center mt-6">
+        <a href="/" class="text-sm text-gray-500 hover:underline">Voltar</a>
+      </div>
+    </div>
+  </body>
+</html>
