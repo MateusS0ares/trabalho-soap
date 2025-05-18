@@ -55,7 +55,7 @@ def soap_service():
         <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
             <RegistrarPedidoResponse xmlns="http://example.com/">
-              <status>Recebido</status>
+              <status>✅ Pedido registrado com sucesso e enviado para a transportadora!</status>
             </RegistrarPedidoResponse>
           </soap:Body>
         </soap:Envelope>
